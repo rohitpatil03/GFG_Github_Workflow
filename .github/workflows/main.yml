@@ -1,18 +1,16 @@
-name:
-  WakeUp Backend
- 
+name: WakeUp Backend
+
 on:
   # Triggers the workflow every 5 minutes
   schedule:
     - cron: "*/5 * * * *"
- 
-      
+
 jobs:
- 
-  cron:
-    # The type of runner that the job will run on
+  wake_up_backend:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: GET request to our backend
-        run: curl ${{ vars.BACKEND_LINK }}
+        env:  # Define an environment variable
+          BACKEND_LINK: ${{ secrets.BACKEND_LINK }}
+        run: curl $BACKEND_LINK
